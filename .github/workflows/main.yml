@@ -17,9 +17,8 @@ jobs:
     - name: Down devops repo
       uses: actions/checkout@v2
       with:
-        repository: myorg/documentation
-        path: documentation
-        token: ${{secrets.PUSH_TOKEN}}
+        repository: tranvanloc412/argo-devops
+        token: ${{ secrets.PUSH_TOKEN }}
 
     - name: check repos
       run: |
