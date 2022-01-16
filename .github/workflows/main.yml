@@ -38,13 +38,13 @@ jobs:
         echo "Pushing image to ECR..."
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:${GITHUB_REF##*/}-$git_hash
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:${GITHUB_REF##*/}-$git_hash"
-        
+
     - name: Down devops repo
       uses: actions/checkout@v2
       with:
         repository: tranvanloc412/argo-devops
         path: devops
-        token: ${{ secrets.PUSH_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: check repos
       run: |
@@ -64,8 +64,17 @@ jobs:
     #     commit_message: Version updated
     - name: Commit and push changes
       env:
-        USED_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        REPO_KEY: ${{ secrets.PUSH_TOKEN }}
+        USERNAME: github-actions[bot]
       run: |
-          # git clone https://tranvanloc412:${{ secrets.GITHUB_TOKEN }}@github.com:tranvanloc412/argo-devops.git # This works
-          ls
-          # cd argo-devops
+        cd devops
+        # git clone https://tranvanloc412:${{ secrets.GITHUB_TOKEN }}@github.com:tranvanloc412/argo-devops.git # This works
+        ls
+        # cd argo-devops
+
+    #  cd documentation
+        # git config --local user.name "github-actions[bot]"
+        # git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        # git add -A
+        # git commit -m "Update image"
+        # git push https://$USERNAME:$REPO_KEY@github.com/myorg/documentation.git
