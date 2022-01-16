@@ -54,6 +54,6 @@ jobs:
       env:
         USED_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-          git clone https://$GITHUB_TOKEN@@github.com:tranvanloc412/argo-devops.git # This works
+          git clone https://$USED_TOKEN@@github.com:tranvanloc412/argo-devops.git # This works
           ls
           cd argo-devops
