@@ -14,16 +14,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Down devops repo
-      uses: actions/checkout@v2
-      with:
-        repository: tranvanloc412/argo-devops
-        token: ${{ secrets.PUSH_TOKEN }}
-
-    - name: check repos
-      run: |
-        ls
-
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -49,6 +39,18 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:${GITHUB_REF##*/}-$git_hash
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:${GITHUB_REF##*/}-$git_hash"
         
+    - name: Down devops repo
+      uses: actions/checkout@v2
+      with:
+        repository: tranvanloc412/argo-devops
+        path: devops
+        token: ${{ secrets.PUSH_TOKEN }}
+
+    - name: check repos
+      run: |
+        ls
+        ls devops
+
     - name: Update Version
       run: |
           git_hash=$(git rev-parse --short "$GITHUB_SHA")
