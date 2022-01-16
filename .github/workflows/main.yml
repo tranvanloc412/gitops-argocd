@@ -73,7 +73,7 @@ jobs:
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git add -A
         git commit -m "Update image"
-        git push https://$USERNAME:$REPO_KEY@github.com:tranvanloc412/argo-devops.git # This works
+        git push https://$USERNAME:$REPO_KEY@github.com/tranvanloc412/argo-devops.git # This works
         ls
         # cd argo-devops
 
