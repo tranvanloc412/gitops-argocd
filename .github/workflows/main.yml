@@ -14,6 +14,17 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Down devops repo
+      uses: actions/checkout@v2
+      with:
+        repository: myorg/documentation
+        path: documentation
+        token: ${{secrets.PUSH_TOKEN}}
+
+    - name: check repos
+      run: |
+        ls
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -54,6 +65,6 @@ jobs:
       env:
         USED_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-          git clone https://tranvanloc412:${{ secrets.GITHUB_TOKEN }}@github.com:tranvanloc412/argo-devops.git # This works
+          # git clone https://tranvanloc412:${{ secrets.GITHUB_TOKEN }}@github.com:tranvanloc412/argo-devops.git # This works
           ls
-          cd argo-devops
+          # cd argo-devops
