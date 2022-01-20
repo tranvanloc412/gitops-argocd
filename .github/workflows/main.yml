@@ -78,7 +78,11 @@ jobs:
         git push https://$USERNAME:$REPO_KEY@github.com/tranvanloc412/argo-devops.git # This works
         ls
         # cd argo-devops
-
+        
+    - name: tfsec
+      uses: tfsec/tfsec-pr-commenter-action@main
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
     #  cd documentation
         # git config --local user.name "github-actions[bot]"
         # git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
